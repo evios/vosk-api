@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef VOSK_KALDI_RECOGNIZER_H
+#define VOSK_KALDI_RECOGNIZER_H
+
 #include "base/kaldi-common.h"
 #include "util/common-utils.h"
 #include "fstext/fstext-lib.h"
@@ -29,6 +32,13 @@
 
 using namespace kaldi;
 
+enum KaldiRecognizerState {
+    RECOGNIZER_INITIALIZED,
+    RECOGNIZER_RUNNING,
+    RECOGNIZER_ENDPOINT,
+    RECOGNIZER_FINALIZED
+};
+
 class KaldiRecognizer {
     public:
         KaldiRecognizer(Model *model, float sample_frequency);
@@ -43,11 +53,14 @@ class KaldiRecognizer {
         const char* PartialResult();
 
     private:
+        void InitState();
         void InitRescoring();
         void CleanUp();
         void UpdateSilenceWeights();
         bool AcceptWaveform(Vector<BaseFloat> &wdata);
-        void GetSpkVector(Vector<BaseFloat> &xvector);
+        bool GetSpkVector(Vector<BaseFloat> &out_xvector, int *frames);
+        const char *GetResult();
+        const char *StoreReturn(const string &res);
 
         Model *model_;
         SingleUtteranceNnet3Decoder *decoder_;
@@ -67,6 +80,8 @@ class KaldiRecognizer {
         int64 samples_processed_;
         int64 samples_round_start_;
 
-        bool input_finalized_;
+        KaldiRecognizerState state_;
         string last_result_;
 };
+
+#endif /* VOSK_KALDI_RECOGNIZER_H */

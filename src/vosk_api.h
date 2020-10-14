@@ -14,8 +14,8 @@
 
 /* This header contains the C API for Vosk speech recognition system */
 
-#ifndef _VOSK_API_H_
-#define _VOSK_API_H_
+#ifndef VOSK_API_H
+#define VOSK_API_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -88,10 +88,10 @@ VoskRecognizer *vosk_recognizer_new(VoskModel *model, float sample_rate);
 VoskRecognizer *vosk_recognizer_new_spk(VoskModel *model, VoskSpkModel *spk_model, float sample_rate);
 
 
-/** Creates the recognizer object with the grammar
+/** Creates the recognizer object with the phrase list
  *
  *  Sometimes when you want to improve recognition accuracy and when you don't need
- *  to recognize large vocabulary you can specify a list of words to recognize. This
+ *  to recognize large vocabulary you can specify a list of phrases to recognize. This
  *  will improve recognizer speed and accuracy but might return [unk] if user said
  *  something different.
  *
@@ -99,7 +99,8 @@ VoskRecognizer *vosk_recognizer_new_spk(VoskModel *model, VoskSpkModel *spk_mode
  *  Precompiled HCLG graph models are not supported.
  *
  *  @param sample_rate The sample rate of the audio you going to feed into the recognizer
- *  @param grammar The string with the list of words to recognize, for example "one two three four five [unk]"
+ *  @param grammar The string with the list of phrases to recognize as JSON array of strings,
+ *                 for example "["one two three four five", "[unk]"]".
  *
  *  @returns recognizer object */
 VoskRecognizer *vosk_recognizer_new_grm(VoskModel *model, float sample_rate, const char *grammar);
@@ -181,9 +182,8 @@ const char *vosk_recognizer_partial_result(VoskRecognizer *recognizer);
 
 
 /** Returns speech recognition result. Same as result, but doesn't wait for silence
- *  You usually call it in the end of the stream to get final bits. You can not
- *  recognize data after final result is retrieved, you have to release the recognizer
- *  and create a new one.
+ *  You usually call it in the end of the stream to get final bits of audio. It
+ *  flushes the feature pipeline, so all remaining audio chunks got processed.
  *
  *  @returns speech result in JSON format.
  */
@@ -208,4 +208,4 @@ void vosk_set_log_level(int log_level);
 }
 #endif
 
-#endif /* _VOSK_API_H_ */
+#endif /* VOSK_API_H */

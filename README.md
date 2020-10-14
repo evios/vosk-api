@@ -1,26 +1,25 @@
-Vosk is an open source speech recognition toolkit which supports 9
-languages - English, German, French, Spanish, Portuguese, Chinese,
-Russian, Turkish, Vietnamese. Vosk works offline with small (50 Mb), but
-accurate model, zero-latency response with streaming API, reconfigurable
+# About
+
+Vosk is an offline open source speech recognition toolkit. It enables
+speech recognition models for 16 languages and dialects - English, Indian
+English, German, French, Spanish, Portuguese, Chinese, Russian, Turkish,
+Vietnamese, Italian, Dutch, Catalan, Arabic, Greek, Farsi.
+
+Vosk models are small (50 Mb) but provide continuous large vocabulary
+transcription, zero-latency response with streaming API, reconfigurable
 vocabulary and speaker identification.
 
-### Installation and usage
+Speech recognition bindings implemented for various programming languages
+like Python, Java, Node.JS, C#, C++ and others.
 
-For Vosk installation instructions, examples and turorial and documentation visit https://alphacephei.com/vosk
+Vosk supplies speech recognition for chatbots, smart home appliances,
+virtual assistants. It can also create subtitles for movies,
+transcription for lectures and interviews.
 
-### Build
+Vosk scales from small devices like Raspberry Pi or Android smartphone to
+big clusters.
 
-[![Build Status](https://travis-ci.com/alphacep/vosk-api.svg?branch=master)](https://travis-ci.com/alphacep/vosk-api)
+# Documentation
 
-### Models for different languages
-
-For information about models see [the documentation on available models](https://alphacephei.com/vosk/models.html).
-
-### Contact Us
-
-If you have any questions, feel free to:
-
-   * Post an issue here on github
-   * Send us an e-mail at [contact@alphacephei.com](mailto:contact@alphacephei.com)
-   * Join our group dedicated to speech recognition on Telegram [@speech_recognition](https://t.me/speech_recognition)
-   * We have a Wechat group which is pretty big, so it is invitation-only. Mail us to join the group and provide some information about yourself.
+For installation instructions, examples and documentation visit [Vosk
+Website](https://alphacephei.com/vosk).
